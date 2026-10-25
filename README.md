@@ -8,23 +8,25 @@
 ## 1. Architectural Overview
 
 ```text
-groom-and-glow/
+Groom & Glow/
 │
-├── frontend/                     # Next.js (App Router, JavaScript Only, Tailwind CSS, Framer Motion, Lucide)
-│   ├── app/                      # App router pages (Home, Services, Book, Gallery, Team, Offers, Reviews, Contact, Admin)
-│   │   ├── admin/                # SaaS Admin Dashboard & Management views
-│   │   │   ├── appointments/     # Table & Day schedule views with action drawer
-│   │   │   ├── services/         # Treatment CRUD and active/inactive toggle
-│   │   │   ├── stylists/         # Stylist profiles & weekly working hour / break editor
-│   │   │   ├── customers/        # Client CRM, lifetime spend & appointment histories
-│   │   │   ├── offers/           # Promotional campaign CRUD
-│   │   │   ├── memberships/      # Membership tier configuration
-│   │   │   ├── gallery/          # Media and before/after transformation management
-│   │   │   ├── reviews/          # Review approval and moderation
-│   │   │   └── analytics/        # Business volume and status charts
-│   ├── components/               # Navbar, Footer, BookingWizard, BeforeAfterSlider, FloatingWhatsApp, Admin widgets
-│   ├── lib/                      # Unified API client and formatting utilities
-│   └── public/                   # Static assets
+├── app/                          # Next.js App router pages (Home, Services, Book, Gallery, Team, Offers, Reviews, Contact, Admin)
+│   ├── admin/                    # SaaS Admin Dashboard & Management views
+│   │   ├── appointments/         # Table & Day schedule views with action drawer
+│   │   ├── services/             # Treatment CRUD and active/inactive toggle
+│   │   ├── stylists/             # Stylist profiles & weekly working hour / break editor
+│   │   ├── customers/            # Client CRM, lifetime spend & appointment histories
+│   │   ├── offers/               # Promotional campaign CRUD
+│   │   ├── memberships/      # Membership tier configuration
+│   │   ├── gallery/          # Media and before/after transformation management
+│   │   ├── reviews/          # Review approval and moderation
+│   │   └── analytics/        # Business volume and status charts
+├── components/                   # Navbar, Footer, BookingWizard, BeforeAfterSlider, FloatingWhatsApp, Admin widgets
+├── lib/                          # Unified API client and formatting utilities
+├── public/                       # Static assets
+├── package.json                  # Root Next.js & workspace package configuration
+├── next.config.mjs               # Next.js configuration & API reverse proxy
+├── jsconfig.json                 # Path aliases (@/* -> ./*)
 │
 ├── backend/                      # Node.js + Express REST API
 │   ├── config/db.js              # Universal database adapter (PostgreSQL / Supabase + zero-config local SQLite)
@@ -35,6 +37,7 @@ groom-and-glow/
 │   ├── db/                       # Relational schema (schema.sql) and full dataset seeder (seed.js)
 │   └── server.js                 # Express application server
 │
+├── .gitignore                    # Unified Git ignore for Next.js, Express, and SQLite
 └── README.md
 ```
 
@@ -71,24 +74,35 @@ groom-and-glow/
 - Node.js (v18+)
 - npm
 
-### 1. Start the Backend API Server
+### 1. Install Dependencies
 
 ```bash
-cd backend
+# Install root (Next.js) dependencies
 npm install
+
+# Install backend Express dependencies
+npm install --prefix backend
+```
+
+### 2. Seed the Database
+
+```bash
 npm run seed      # Seeds 16+ services, 5 stylists with working hours, reviews, gallery, sample appointments
-npm run dev       # Starts Express API on port 5000
 ```
 
-### 2. Start the Frontend Next.js App
+### 3. Start Both Frontend & Backend Concurrently
 
 ```bash
-cd frontend
-npm install
-npm run dev       # Starts Next.js dev server on http://localhost:3000
+npm run dev
 ```
 
-Open `http://localhost:3000` in your browser.
+- **Frontend (Next.js)**: `http://localhost:3000`
+- **Backend API (Express)**: `http://localhost:5000`
+- **Admin Portal**: `http://localhost:3000/admin/login`
+
+> To run services independently:
+> - `npm run dev:frontend` (starts Next.js on port 3000)
+> - `npm run dev:backend` (starts Express API on port 5000)
 
 ---
 
