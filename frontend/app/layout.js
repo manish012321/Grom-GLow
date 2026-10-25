@@ -8,8 +8,15 @@ export const metadata = {
   title: 'Groom & Glow — Beauty, refined. | Modern Unisex Salon',
   description: 'An architectural unisex salon offering bespoke hair design, clinical facials, royal beard sculpting, and holistic spa rituals in Bandra West, Mumbai.',
   keywords: 'unisex salon Mumbai, luxury haircut, balayage hair color, hydrafacial, beard sculpting, Groom and Glow',
-  viewport: 'width=device-width, initial-scale=1, maximum-scale=5',
-  themeColor: '#FDFBF7'
+  // viewport and themeColor REMOVED from here
+};
+
+// ADDED: New viewport export
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: '#FDFBF7',
 };
 
 export default function RootLayout({ children }) {
