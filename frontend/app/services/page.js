@@ -1,14 +1,14 @@
 // frontend/app/services/page.js
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { api } from '@/lib/api';
 import { formatCurrency } from '@/lib/utils';
 import { Clock, Scissors, ArrowRight, Sparkles } from 'lucide-react';
 
-export default function ServicesPage() {
+function ServicesContent() {
   const searchParams = useSearchParams();
   const initialCategory = searchParams.get('category') || 'ALL';
   const initialGender = searchParams.get('gender') || 'ALL';
@@ -173,3 +173,12 @@ export default function ServicesPage() {
     </div>
   );
 }
+
+export default function ServicesPage() {
+  return (
+    <Suspense fallback={<div className="p-24 text-center">Loading...</div>}>
+      <ServicesContent />
+    </Suspense>
+  );
+}
+

@@ -1,7 +1,7 @@
 // frontend/components/BookingWizard.jsx
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { api } from '@/lib/api';
 import { formatCurrency, formatDate, formatTime, createGoogleCalendarUrl } from '@/lib/utils';
@@ -21,7 +21,7 @@ import {
   Loader2
 } from 'lucide-react';
 
-export default function BookingWizard() {
+function BookingWizardContent() {
   const searchParams = useSearchParams();
   const preselectedServiceId = searchParams.get('service');
   const preselectedStylistId = searchParams.get('stylist');
@@ -836,3 +836,12 @@ export default function BookingWizard() {
     </div>
   );
 }
+
+export default function BookingWizard() {
+  return (
+    <Suspense fallback={<div className="p-24 text-center">Loading...</div>}>
+      <BookingWizardContent />
+    </Suspense>
+  );
+}
+
